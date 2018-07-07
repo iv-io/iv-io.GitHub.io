@@ -13,3 +13,14 @@ This is another paragraph.
 have a see.
 >
 >Another paragraph.
+
+And There is a table:
+
+| name | fun? |
+| :--  | --:  |
+| Bob  | 0    |
+| Tom  | 1    |
+So how do you think?
+
+- [x] just a test
+- []  And it is, too. 
