@@ -20,7 +20,8 @@ And There is a table:
 | :--  | --:  |
 | Bob  | 0    |
 | Tom  | 1    |
+
 So how do you think?
 
 - [x] just a test
-- []  And it is, too. 
+- [ ]  And it is, too. 
