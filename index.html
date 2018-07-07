@@ -5,9 +5,13 @@ layout: default
 {{ site.time }}
 
 {%- for i in site.pages -%}
-	{{ site.pages[i].url }}<br>
+	{{ i.url }}1<br>
 {% endfor %}
 
 {%- for i in site.posts -%}
-	{{ site.posts[i] }}<br>
+	{{ i }}2<br>
+{% endfor %}
+
+{%- for i in site.data.test -%}
+	{{ i.name }}3<br>
 {% endfor %}
