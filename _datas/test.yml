@@ -1,0 +1,5 @@
+- name: bob
+  ishuman:false
+
+- name:tom
+  ishuman:true
