@@ -2,4 +2,12 @@
 layout: default
 ---
 
-123
+{{ site.time }}
+
+{%- for i in site.pages -%}
+	{{ site.pages[i] }}<br>
+{{% endfor %}}
+
+{%- for i in site.posts -%}
+	{{ site.posts[i] }}<br>
+{{% endfor %}}
