@@ -5,7 +5,7 @@ layout: default
 {{ site.time }}
 
 {%- for i in site.pages -%}
-	{{ site.pages[i] }}<br>
+	{{ site.pages[i].url }}<br>
 {% endfor %}
 
 {%- for i in site.posts -%}
