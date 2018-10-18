@@ -1,0 +1,206 @@
+<html>
+<head>
+<title>test</title>
+<script src="http://202.115.47.163/G2S/js/jquery-1.8.3.min.js"></script>
+<style>
+	section{
+		border:1px solid #000;
+	}
+	#show{
+		height:50px;
+		width:300px;
+		margin:2px;
+		padding:3px;
+		border:1px solid #000;
+	}
+	a{
+		display:inline-block;
+		width:40px;
+		height:20px;
+		cursor:pointer;
+		background:#999;
+		margin-bottom:5px;
+		margin-left:3px;
+		margin-top:5px;
+		line-height:20px;
+		text-align:center;
+	}
+	a:hover{
+		background:#aaa;
+	}
+</style>
+</head>
+<body>
+	<section>
+		<h2>管理学随机抽题</h2>
+		<div id="show">
+			
+		</div>
+		<div id="buttonarea">
+			<label for="cha">选择章节<select id="cha">
+				<option value ="-1">All</option>
+				<option value ="0">1</option>
+				<option value ="1">2</option>
+				<option value ="2">3</option>
+				<option value ="3">4</option>
+				<option value ="4">5</option>
+				<option value ="5">6</option>
+				<option value ="6">7</option>
+				<option value ="7">8</option>
+				<option value ="8">9</option>
+				<option value ="9">10</option>
+			</select></label><br>
+			去重：
+			<input type="radio" checked="checked" name="rom" value="0"><br>
+			随机：
+			<input type="radio" name="rom" value="1"><br>
+			<a id="button1">Start</a> <a id="button2">归零</a>
+		</div>
+	</section>
+
+
+
+
+<script>
+var question=[[
+"企业主要特征？",
+"管理职能（4个）",
+"控制职能的重要性？",
+"领导职能的内容？",
+"企业管理的含义？",
+"计划职能种类、内容和程序？",
+"组织职能内容？",
+"网络企业时代环境变革特点、机遇、挑战？",
+"网络企业管理的特点？",
+],[
+"企业战略管理过程？",
+"企业产业环境分析？",
+"企业核心能力的含义、特征、源泉？",
+"经营战略制订主要环节？同（二、一）",
+"价值创新战略逻辑、特点？",
+],[
+"客户关系管理产生背景、意义？CRM包含模块？",
+"客户分析具体步骤？支持流程？",
+"客户关系管理：关键技术？",
+"客户关系管理的实施步骤？实施条件？（生）",
+],[
+"企业组织的基本职能？",
+"组织运作的内容？组织设计的步骤？",
+"金字塔式组织弊端？扁平化优点、条件？柔性化表现、组织形式？",
+"网络型组织基本类型？特征？优点？（生）",
+"企业组织再造的实施步骤？基础工作？",
+"学习型组织建立意义？构建方法？",
+],[
+"如何分析市场营销？",
+"产业市场特征？消费者主要信息来源？影响因素？",
+"市场定位步骤？",
+"产品组合的构成、决策？价格影响因素？渠道选择因素？产品生命周期阶段？",
+"品牌决策作用？促销决策方式、影响因素、过程？",
+"网络营销产生、特点、发展，对传统营销的冲击、内容和层次？",
+"网络营销站点规划？市场调查特点？直接调查步骤？",
+],[
+"JIT要点",
+"敏捷制造主要形式和主要支撑技术。",
+],[
+],[
+"人力资源特点、使用基本原则、历史演变",
+"人力资源规划制定程序？工作分析作用？工作分析流程？",
+"员工培训工作流程？招聘和选用程序？招聘评估作用？",
+"员工绩效考评的程序？影响薪酬的因素？",
+"网上招聘应注意的问题？优点？网上培训注意事项？",
+"网络化考核的优点？人力资源管理的主要措施？（生）",
+],[
+"知识的分类？知识管理特点？（生）",
+"知识管理的意义？（生）",
+"个人化策略和编码策略的特点？",
+"企业如何根据自身情况来选择知识管理？",
+"CKO主要任务？具体职责？",
+"知识管理应做的几方面工作？如何建设有利于知识管理的企业文化？",
+"内外部知识网络学习主导方式？",
+],[
+"供应链管理含义、意义？",
+"能力平衡的作用？供应链管理环境下的生产控制内容？",
+"物流管理策略？",
+"VMI步骤？JMI优点？实施步骤？（生）",
+"如何实施准时采购？"]];
+//var map=[[0,0,0,0,0,0,0,0,0],[0,0,0,0,0],[0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0],[],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0]];
+var map=map2zero(question);
+function map2zero(question){
+	var map=new Array(question.length);
+	for(var i in question){
+		map[i]=new Array(question[i].length);
+		for(var j in question[i]){
+			map[i][j]=0;
+		}
+	}
+	return map;
+}
+function chooseQuestion(question,map,x){
+	var newmap=new Array(map.length);
+	for(var i in map){
+		newmap[i]=[];
+		for(var j in map[i]){
+			if(!map[i][j])newmap[i].push(Number(j));
+		}
+	}
+	var newM=[];
+	for(var i in newmap){
+		if(newmap[i].length)newM.push(Number(i));
+	}
+	if(!newM.length){
+		return 0;
+	}
+	var chapter=newM[Math.floor(Math.random()*newM.length)];
+	if(x<0){
+		var qnum=newmap[chapter][Math.floor(Math.random()*newmap[chapter].length)];
+		map[chapter][qnum]=1;
+		return question[chapter][qnum]+"("+(Number(chapter)+1)+")";
+	}else{
+		if(!newmap[x].length){
+			return 0;
+		}else{
+			chapter=x;
+			var qnum=newmap[chapter][Math.floor(Math.random()*newmap[chapter].length)];
+			map[chapter][qnum]=1;
+			return question[chapter][qnum]+"("+(Number(chapter)+1)+")";
+		}
+	}
+	
+}
+
+function chooseQuestionR(question,x){
+	if(x<0){
+		var chapter=Math.floor(Math.random()*question.length);
+		var qnum=Math.floor(Math.random()*question[chapter].length);
+		return question[chapter][qnum]+"("+(Number(chapter)+1)+")";
+	}else{
+		var qnum=Math.floor(Math.random()*question[x].length);
+		return question[x][qnum]+"("+(Number(x)+1)+")";
+	}
+}
+
+</script>
+
+<script>
+function getV(){
+	var cha=$("#cha").val();
+	var rom=$("input:radio:checked").val();
+	return [cha,rom];
+}
+$("#button1").click(function(){
+	var X=getV();
+	if(Number(X[1])){
+		var show=chooseQuestionR(question,Number(X[0]));
+		$("#show").html(show);
+	}else{
+		var show=chooseQuestion(question,map,Number(X[0]));
+		if(show) $("#show").html(show);
+		else $("#show").html("题抽完了");
+	}
+});
+$("#button2").click(function(){
+	map=map2zero(question);
+	$("#show").html('');
+});
+</script>
+</body>
